@@ -6,7 +6,7 @@
 
 <groupId>e22eea98-1cd3-49fd-9540-a8802b565500</groupId>
 	<artifactId>munit-poc</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>mule-application</packaging>
 
 	<name>munit-poc</name>
@@ -18,7 +18,7 @@
 		<app.runtime>4.4.0</app.runtime>
 <app.majorVersion>v1</app.majorVersion>
 		<mule.maven.plugin.version>4.0.0</mule.maven.plugin.version>
-		<munit.version>2.3.14</munit.version>
+		<munit.version>2.3.9</munit.version>
 	</properties>
 
 	<build>
@@ -40,13 +40,14 @@
 						<provider>MC</provider>
 						<businessGroupId>${project.groupId}</businessGroupId>
 						<applicationName>${project.artifactId}</applicationName>
-						<environment>${environment}</environment>
+						<environment>${mule.environment}</environment>
 						<target>Cloudhub-US-East-2</target>
 						<replicas>1</replicas>
 						<vCores>0.1</vCores>
 						<skipDeploymentVerification>true</skipDeploymentVerification>
 						<properties>
-							<env>${mule.env}</env>
+							<env>${mule.environment}</env>
+							<mule.hostname>${mule.hostname}</mule.hostname>
 						</properties>
 						<deploymentSettings>
 							<http>
@@ -174,19 +175,20 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-
 			<groupId>com.mulesoft.munit</groupId>
-
 			<artifactId>munit-remote</artifactId>
-
 			<version>${munit.version}</version>
-
 			<scope>test</scope>
-
 		</dependency>
 	</dependencies>
 
 	<repositories>
+	    <repository>
+			<id>ca.anypoint.credentials</id>
+			<name>Anypoint Exchange</name>
+			<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+			<layout>default</layout>
+		</repository>
 		<repository>
 			<id>anypoint-exchange-v3</id>
 			<name>Anypoint Exchange</name>
@@ -200,7 +202,6 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>mulesoft-releases</id>
